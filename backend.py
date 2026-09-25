@@ -363,10 +363,7 @@ def get_metrics(ticker: str = Query(..., description="Stock ticker symbol (e.g. 
             detail=f"Error analyzing ticker '{ticker}': {str(e)}"
         )
 
-
 if __name__ == "__main__":
-    print("=" * 65)
-    print("Starting Wharton Sim QuantStats Backend on http://127.0.0.1:8000")
-    print("Endpoint: http://127.0.0.1:8000/metrics?ticker=AAPL")
-    print("=" * 65)
-    uvicorn.run("backend:app", host="127.0.0.1", port=8000, reload=True)
+    import os
+    port = int(os.environ.get("PORT", 10000))
+    uvicorn.run("backend:app", host="0.0.0.0", port=port)
